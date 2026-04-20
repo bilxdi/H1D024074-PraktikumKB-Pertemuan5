@@ -1,4 +1,4 @@
-# data rusak, solusi, dan kendala nya -> ("nama rusak", "solusi") : {"kendala1", "kendala2", ...}
+# data penyakit, dan gejala nya -> "nama penyakit" : {"gejala1", "gejala2", ...}
 rules_penyakit = {
     "Tonsilitis" : {"G37", "G12", "G5", "G27", "G6", "G21"},
     "Sinusitis Maksilaris" : {"G37", "G12", "G27", "G17", "G33", "G36", "G29"},
@@ -25,6 +25,7 @@ rules_penyakit = {
     "Vertigo Postular" : {"G24"}
 }
 
+# kode gejala, dan nama gejala nya -> "kode gejala" : "nama gejala"
 list_gejala = {
     "G1" : "Nafas abnormal",
     "G2" : "Suara serak",
@@ -87,11 +88,21 @@ def diagnosa_gejala(input_gejala):
     hasil_diagnosa = []
 
     for penyakit, syarat_penyakit in rules_penyakit.items():
-        # Cek apakah SEMUA gejala syarat terpenuhi oleh input user
-        if syarat_penyakit.issubset(input_gejala):
-            hasil_diagnosa.append(penyakit)
+        # hitung jumlah gejala yang cocok
+        cocok = len(syarat_penyakit.intersection(input_gejala))
+        total = len(syarat_penyakit)
 
-    return hasil_diagnosa if hasil_diagnosa else ["Tidak terdeteksi penyakit yang valid"]
+        # hitung persentase
+        persentase = (cocok / total) * 100
+
+        # simpan hasil diagnosa
+        hasil_diagnosa.append((penyakit, persentase))
+
+    # urutkan dari terbesar ke kecil
+    hasil_diagnosa.sort(key=lambda x: x[1], reverse=True)
+
+    return hasil_diagnosa
+
 
 # judul awal
 print("=== SISTEM PAKAR DIAGNOSA PENYAKIT THT ===")
@@ -102,4 +113,13 @@ for kodes, gejalas in list_gejala.items():
     tanya_gejala(kodes, gejalas)
 
 # print hasil diagnosa
-print(f"\nHasil Diagnosa: {diagnosa_gejala(gejala)}")
+if not gejala:
+    print("\nAnda tidak memilih gejala apapun.")
+    print("Tidak dapat melakukan diagnosa.")
+else:
+    hasil = diagnosa_gejala(gejala)
+
+    print("\nHasil Diagnosa:")
+    for penyakit, persen in hasil[:3]:
+        if persen >= 30:
+            print(f"- {penyakit}: {persen:.2f}%")
