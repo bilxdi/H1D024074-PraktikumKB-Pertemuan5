@@ -65,14 +65,14 @@ list_gejala = {
     "G37" : "Demam"
 }
 
-# list kosong menampung kendala
+# list kosong menampung gejala
 gejala = []
 
 # fungsi tanya pertanyaan dan kirim ke array gejala
-def tanya_gejala(kode_gejala, teks_pertanyaan):
+def tanya_gejala(kode_gejala, nama_gejala):
     # menampilkan pertanyaan dan validasi
     while True:
-        jawaban = input(f"{teks_pertanyaan} (y/t): ").lower()
+        jawaban = input(f"Apakah anda mengalami {nama_gejala}? (y/t): ").lower()
         if jawaban in ['y', 't']:
             break
         else:
@@ -86,20 +86,20 @@ def tanya_gejala(kode_gejala, teks_pertanyaan):
 def diagnosa_gejala(input_gejala):
     hasil_diagnosa = []
 
-    for gejala, syarat_gejala in rules_penyakit.items():
+    for penyakit, syarat_penyakit in rules_penyakit.items():
         # Cek apakah SEMUA gejala syarat terpenuhi oleh input user
-        if syarat_gejala.issubset(input_gejala):
-            hasil_diagnosa.append(gejala)
+        if syarat_penyakit.issubset(input_gejala):
+            hasil_diagnosa.append(penyakit)
 
-    return hasil_diagnosa if hasil_diagnosa else ["Tidak terdeteksi rusak"]
+    return hasil_diagnosa if hasil_diagnosa else ["Tidak terdeteksi penyakit yang valid"]
 
 # judul awal
-print("=== SISTEM PAKAR DIAGNOSA KERUSAKAN KOMPUTER ===")
+print("=== SISTEM PAKAR DIAGNOSA PENYAKIT THT ===")
 print("Jawablah pertanyaan berikut dengan 'y' untuk Ya atau 't' untuk Tidak.\n")
 
 # tanya gejala
-for kode, gejala in list_gejala.items():
-    tanya_gejala(kode, gejala)
+for kodes, gejalas in list_gejala.items():
+    tanya_gejala(kodes, gejalas)
 
 # print hasil diagnosa
 print(f"\nHasil Diagnosa: {diagnosa_gejala(gejala)}")
