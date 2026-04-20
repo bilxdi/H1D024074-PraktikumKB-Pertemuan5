@@ -69,7 +69,7 @@ list_gejala = {
 # list kosong menampung gejala
 gejala = []
 
-# fungsi tanya pertanyaan dan kirim ke array gejala
+# fungsi tanya pertanyaan dan kirim ke gejala
 def tanya_gejala(kode_gejala, nama_gejala):
     # menampilkan pertanyaan dan validasi
     while True:
@@ -83,7 +83,7 @@ def tanya_gejala(kode_gejala, nama_gejala):
     if jawaban == 'y':
         gejala.append(kode_gejala)
 
-# fungsi mendiagnosis hasil berdasarkan array gejala
+# fungsi mendiagnosis hasil berdasarkan gejala
 def diagnosa_gejala(input_gejala):
     hasil_diagnosa = []
 
