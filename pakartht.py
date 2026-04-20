@@ -103,7 +103,6 @@ def diagnosa_gejala(input_gejala):
 
     return hasil_diagnosa
 
-
 # judul awal
 print("=== SISTEM PAKAR DIAGNOSA PENYAKIT THT ===")
 print("Jawablah pertanyaan berikut dengan 'y' untuk Ya atau 't' untuk Tidak.\n")
