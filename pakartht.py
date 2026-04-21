@@ -120,5 +120,5 @@ else:
 
     print("\nHasil Diagnosa:")
     for penyakit, persen in hasil[:3]:
-        if persen >= 30:
+        if persen >= 5:
             print(f"- {penyakit}: {persen:.2f}%")
