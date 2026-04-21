@@ -108,8 +108,8 @@ print("=== SISTEM PAKAR DIAGNOSA PENYAKIT THT ===")
 print("Jawablah pertanyaan berikut dengan 'y' untuk Ya atau 't' untuk Tidak.\n")
 
 # tanya gejala
-for kodes, gejalas in list_gejala.items():
-    tanya_gejala(kodes, gejalas)
+for kodes, names in list_gejala.items():
+    tanya_gejala(kodes, names)
 
 # print hasil diagnosa
 if not gejala:
